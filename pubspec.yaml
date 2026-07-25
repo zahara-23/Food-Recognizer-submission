@@ -1,0 +1,44 @@
+name: food_recognizer
+description: "Food Recognizer - identifikasi makanan dengan Machine Learning (TensorFlow Lite / LiteRT), lengkap dengan info resep (TheMealDB) dan estimasi nutrisi (Gemini API)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # --- Kriteria 1: Pengambilan Gambar ---
+  image_picker: ^1.1.2          # ambil gambar dari galeri / kamera bawaan
+  camera: ^0.10.6               # custom camera + camera feed (real-time)
+  image_cropper: ^8.0.2         # crop gambar hasil pengambilan
+  permission_handler: ^11.3.1   # request izin kamera & storage
+
+  # --- Kriteria 2: Machine Learning ---
+  tflite_flutter: ^0.12.1       # LiteRT (TensorFlow Lite) inference
+  image: ^4.2.0                 # decode & resize gambar untuk preprocessing
+  firebase_core: ^3.6.0         # wajib untuk Firebase ML
+  firebase_ml_model_downloader: ^0.3.2  # download model dinamis dari Firebase ML
+  path_provider: ^2.1.4         # lokasi penyimpanan file model & gambar
+
+  # --- Kriteria 3: Halaman Prediksi (Web API) ---
+  http: ^1.2.2                  # request ke MealDB API & Gemini API
+
+  # --- Util ---
+  flutter_dotenv: ^5.2.1        # menyimpan API key Gemini tanpa hardcode di kode
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/model/food_classifier.tflite
+    - assets/model/labels.txt
+    - .env
